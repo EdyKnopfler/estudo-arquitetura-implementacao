@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  db:
+    container_name: db_mysql
+    image: mysql:8.0.33
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_dev
+      - MYSQL_USER=dev
+      - MYSQL_PASSWORD=dev
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db:/var/lib/mysql
+      
+  app:
+    container_name: reservas_backend
+    image: reservas-backend
+    ports:
+      - "8080:8080"
+      
