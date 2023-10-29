@@ -1,0 +1,3 @@
+[submodule "reservas-frontend"]
+	path = reservas-frontend
+	url = git@github.com:EdyKnopfler/estudo-arquitetura-reservas-frontend.git
