@@ -1,6 +1,8 @@
 [submodule "reservas-frontend"]
 	path = reservas-frontend
 	url = git@github.com:EdyKnopfler/estudo-arquitetura-reservas-frontend.git
+	branch = main
 [submodule "reservas-backend"]
 	path = reservas-backend
 	url = git@github.com:EdyKnopfler/estudo-arquitetura-reservas-backend.git
+	branch = main
