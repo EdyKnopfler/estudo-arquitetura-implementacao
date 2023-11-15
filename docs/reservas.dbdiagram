@@ -5,7 +5,7 @@ Table aeroporto {
   codigo_externo varchar [not null]
   nome varchar [not null]
   localidade varchar [not null]
-  Note: 'alimentada conforme as opções dadas pela companhia aérea são selecionadas pelo usuário'
+  Note: 'Alimentada conforme as opções dadas pela companhia aérea são selecionadas pelo usuário'
 }
 
 Table empresa {
