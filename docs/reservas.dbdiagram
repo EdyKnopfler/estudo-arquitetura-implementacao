@@ -1,0 +1,99 @@
+// https://dbdiagram.io
+
+Table aeroporto {
+  id integer [primary key, increment]
+  codigo_externo varchar [not null]
+  nome varchar [not null]
+  localidade varchar [not null]
+  Note: 'alimentada conforme as opções dadas pela companhia aérea são selecionadas pelo usuário'
+}
+
+Table empresa {
+  id integer [primary key, increment]
+  nome varchar [not null]
+}
+
+Table linha_aerea {
+  id integer [primary key, increment]
+  id_empresa integer [not null]
+  codigo_externo varchar [not null]
+  companhia varchar [not null]
+}
+
+Ref: linha_aerea.id_empresa > empresa.id
+
+Table linha_aerea_aeroporto {
+  id_linha_aerea integer [not null]
+  id_aeroporto integer [not null]
+  Note: 'Alimentada conforme as opções dadas pela companhia aérea são selecionadas pelo usuário'
+}
+
+Ref: linha_aerea_aeroporto.id_linha_aerea > linha_aerea.id
+Ref: linha_aerea_aeroporto.id_aeroporto > aeroporto.id
+
+Table destino {
+  id integer [primary key, increment]
+  nome varchar [not null]
+  Note: 'Descrição, fotos, etc. ficam à parte no serviço de catálogo, possivelmente usando banco de dados de indexação textual'
+}
+
+Table destino_linha_aerea {
+  id_destino integer [not null]
+  id_linha_aerea integer [not null]
+  id_aeroporto integer [not null, note: 'O aeroporto localizado no destino, dentre todos os atendidos pela linha']
+}
+
+Ref: destino_linha_aerea.id_destino > destino.id
+Ref: destino_linha_aerea.id_linha_aerea > linha_aerea.id
+Ref: destino_linha_aerea.id_aeroporto > aeroporto.id
+
+Table hotel {
+  id integer [primary key, increment]
+  id_destino integer [not null]
+  id_empresa integer [not null]
+  codigo_externo varchar [not null]
+  nome varchar [not null]
+}
+
+Ref: hotel.id_destino > destino.id
+Ref: hotel.id_empresa > empresa.id
+
+Table usuario {
+  id integer [primary key]
+  codigo uuid [unique]
+  nome varchar [not null]
+  cpf varchar [unique, not null]
+  email varchar [unique, not null]
+  senha varchar [not null]
+}
+
+Table agendamento_pacote {
+  id integer [primary key, increment]
+  id_usuario integer [not null]
+  id_destino integer [not null]
+  id_linha_area_ida integer [not null]
+  id_aeroporto_ida_partida integer [not null]
+  id_aeroporto_ida_chegada integer [not null]
+  instante_ida timestamp [not null]
+  id_linha_area_volta integer [not null]
+  id_aeroporto_volta_partida integer [not null]
+  id_aeroporto_volta_chegada integer [not null]
+  instante_volta timestamp [not null]
+  id_hotel integer [not null]
+  instante_hotel_checkin timestamp [not null]
+  instante_hotel_checkout timestamp [not null]
+  Note: 'Opções de datas e horários fornecidas e validadas no sistema externo (hotel/cia. aérea)'
+}
+
+Ref: agendamento_pacote.id_usuario > usuario.id
+Ref: agendamento_pacote.id_destino > destino.id
+Ref: agendamento_pacote.id_linha_area_ida > linha_aerea.id
+Ref: agendamento_pacote.id_aeroporto_ida_partida > aeroporto.id
+Ref: agendamento_pacote.id_aeroporto_ida_chegada > aeroporto.id
+Ref: agendamento_pacote.id_linha_area_volta > linha_aerea.id
+Ref: agendamento_pacote.id_aeroporto_volta_partida > aeroporto.id
+Ref: agendamento_pacote.id_aeroporto_volta_chegada > aeroporto.id
+Ref: agendamento_pacote.id_hotel > hotel.id
+
+
+
