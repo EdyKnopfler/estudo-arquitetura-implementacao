@@ -6,3 +6,9 @@
 	path = reservas-backend
 	url = git@github.com:EdyKnopfler/estudo-arquitetura-reservas-backend.git
 	branch = main
+[submodule "lib"]
+	path = lib
+	url = https://github.com/EdyKnopfler/estudo-arquitetura-lib-backend
+[submodule "disparotimeouts"]
+	path = disparotimeouts
+	url = https://github.com/EdyKnopfler/estudo-arquitetura-reservas-backend/
