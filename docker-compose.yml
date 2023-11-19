@@ -1,21 +1,58 @@
 version: '3'
 
 services:
-  db:
+  database:
     container_name: db_mysql
     image: mysql:8.0.33
+    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root_dev
       - MYSQL_USER=dev
       - MYSQL_PASSWORD=dev
+      - MYSQL_DATABASE=sessoes
     ports:
       - "3306:3306"
     volumes:
       - ./db:/var/lib/mysql
+    networks:
+      - sagas
       
-  app:
+  cache:
+    container_name: cache_redis
+    image: redis:7.2.1-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    volumes: 
+      - ./cache:/data
+    networks:
+      - sagas
+      
+  broker:
+    container_name: rabbitmq
+    image: rabbitmq:3.12-management
+    restart: always
+    hostname: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=dev
+      - RABBITMQ_DEFAULT_PASS=dev
+    volumes:
+      - ./rabbitmq:/var/lib/rabbitmq/mnesia
+    networks:
+      - sagas
+
+  reservas_backend:
     container_name: reservas_backend
     image: reservas-backend
     ports:
       - "8080:8080"
+    networks:
+      - sagas
+      
+networks:
+  sagas:      
       

@@ -3,3 +3,9 @@
 
 # Base de dados
 db/
+
+# Cache
+cache/
+
+# Filas
+rabbitmq/

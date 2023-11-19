@@ -29,6 +29,22 @@ O código de manipulação das sessões usável pelos dois serviços será dispo
 
 ## Construir e rodar
 
+### Desenvolvimento
+
+Os projetos Java podem ser rodados diretamente do IDE. Sua configuração default acessam os bancos de dados MySQL e Redis e o broker RabbitMQ em `localhost` nas portas padrão `3306`, `6379` e `5672`, respectivamente. Esses bancos de dados podem ser iniciados a partir do `docker-compose.yml` na pasta raiz deste repositório:
+
+```bash
+# database: base de dados principal (MySQL)
+# cache: base de dados de cache e gerenciamento de travas (Redis)
+# broker: sistema de mensageria (RabbitMQ)
+# -d (opcional): roda em background (daemon)
+docker compose up database cache broker [-d]
+```
+
+### Imagens Docker
+
+**(Em construção!)**
+
 Imagem do backend das reservas:
 
 ```bash
