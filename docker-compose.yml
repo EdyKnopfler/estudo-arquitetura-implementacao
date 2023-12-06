@@ -48,6 +48,8 @@ services:
   reservas_backend:
     container_name: reservas_backend
     image: reservas-backend
+    environment:
+      - DATABASE_URL=jdbc:mysql://database:3306/sessoes?useTimezone=true&serverTimezone=UTC
     ports:
       - "8080:8080"
     networks:

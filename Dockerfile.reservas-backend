@@ -3,7 +3,6 @@ WORKDIR /build
 COPY ./lib/pom.xml .
 RUN mvn verify --fail-never
 COPY ./lib .
-RUN ls
 RUN mvn clean package -DskipTests
 
 FROM maven:3.8.5-openjdk-17 AS build-backend
