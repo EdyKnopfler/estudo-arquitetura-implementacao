@@ -48,8 +48,7 @@ docker compose up database cache broker [-d]
 Imagem do backend das reservas:
 
 ```bash
-cd reservas-backend
-./build-image.sh
+./build-images.sh
 cd ..
 ```
 
